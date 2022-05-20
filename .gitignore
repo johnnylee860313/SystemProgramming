@@ -1,0 +1,2 @@
+#ignore exe under lseek
+/lseek/*.exe
