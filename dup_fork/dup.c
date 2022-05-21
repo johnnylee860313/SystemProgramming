@@ -5,13 +5,30 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <time.h>
+#define FILE_MODE (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
+#define FILE_FLAG (O_CREAT|O_RDWR|O_TRUNC)
+
 
 int main(void){
     int fd,fd2;
+    FILE *pFile;
     int intfromfile = 0,sum = 0,max = 0,i = 0;
-    char readfromfile[10] = {'0'};
+    char readfromfile[10];
 
-    if((fd = open("FileSharing.txt",O_RDONLY) < 0)) return -1;
+    if((fd = open("FileSharing.txt",O_RDONLY)) < 0) return -1;
+    // if ((fd = creat("FileSharing.txt", FILE_MODE)) < 0)
+	// 	perror("creat error");
+
+    // pFile = fopen( "FileSharing.txt","w" );
+
+    // if( NULL == pFile ){
+    //     printf( "open failure" );
+    //     return 1;
+    // }else{
+    //     for(int i = 0;i < 101;i++){
+    //         fprintf(pFile,"%d\n",i);
+    //     }
+    // }
 
     fd2 = dup(fd);
     srand(time(NULL));
@@ -39,8 +56,9 @@ int main(void){
         }
     }
 
-    //close(fd);
-    //close(fd2);
+    close(fd);
+    close(fd2);
+    fclose(pFile);
 
     return 0;
 
