@@ -1,2 +1,4 @@
 #ignore exe under lseek
 /lseek/*.exe
+/dup_fork/*.exe
+/atomicOperation/*.exe
